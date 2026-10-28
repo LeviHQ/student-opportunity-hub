@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { PALETTE, type Question } from "@/data/survey";
 
 export function SurveyChart({ q, index }: { q: Question; index: number }) {
-  const data = q.slices.map((s, i) => ({ ...s, color: PALETTE[i % PALETTE.length] }));
+  const data = q.slices.map((s, i) => ({ ...s, color: PALETTE[i % PALETTE.length] ?? "#94A3B8" }));
   const plotted = data.filter((d) => d.value !== null);
   const missing = data.some((d) => d.value === null);
   return (
@@ -20,7 +20,7 @@ export function SurveyChart({ q, index }: { q: Question; index: number }) {
                 {plotted.map((d) => <Cell key={d.label} fill={d.color} />)}
               </Pie>
               <Tooltip
-                formatter={(v: number) => `${v.toFixed(1)}%`}
+                formatter={(v) => `${Number(v).toFixed(1)}%`}
                 contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 8, color: "var(--foreground)" }}
                 itemStyle={{ color: "var(--foreground)" }}
               />
