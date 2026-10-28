@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { PALETTE, type Question } from "@/data/survey";
 
 export function SurveyChart({ q, index }: { q: Question; index: number }) {
@@ -15,8 +15,7 @@ export function SurveyChart({ q, index }: { q: Question; index: number }) {
       {q.featured && <span className="mt-2 w-fit rounded-full bg-primary/15 px-2 py-0.5 text-xs text-primary">Key finding</span>}
       <div className="mt-4 grid items-center gap-4 sm:grid-cols-[200px_1fr]">
         <div className="mx-auto h-[200px] w-[200px]">
-          <ResponsiveContainer>
-            <PieChart>
+          <PieChart width={200} height={200}>
               <Pie data={plotted} dataKey="value" nameKey="label" innerRadius={55} outerRadius={92} paddingAngle={2} stroke="var(--card)" isAnimationActive>
                 {plotted.map((d) => <Cell key={d.label} fill={d.color} />)}
               </Pie>
@@ -26,7 +25,6 @@ export function SurveyChart({ q, index }: { q: Question; index: number }) {
                 itemStyle={{ color: "var(--foreground)" }}
               />
             </PieChart>
-          </ResponsiveContainer>
         </div>
         <ul className="space-y-1.5 text-sm">
           {data.map((d) => (
