@@ -210,7 +210,7 @@ function Index() {
         <div className="grid gap-5 md:grid-cols-2">
           {[
             ["01", "Scholarship Discovery", "40.8%", "Selected either ‘Not very confident’ or ‘Not sure where to start’ when finding suitable scholarships.", q.confidence.title],
-            ["02", "Career Information Is Fragmented", "5+ sources", "Respondents use multiple channels for career guidance, including teachers, personal networks, websites and social media.", q.guidance.title],
+            ["02", "Career Information Is Fragmented", "Multiple", "Respondents use multiple channels for career guidance, including teachers, personal networks, websites and social media.", q.guidance.title],
             ["03", "Job-Ready Skills Lead", "26.2%", "Job-ready skills received the highest share of resource priorities, while scholarships and career roadmaps each received 22.3%.", q.priority.title],
             ["04", "Potential Interest in One Central Resource", "77.7%", "Respondents answered Yes or Maybe when asked whether a single digital page of verified scholarship, course and career links would be useful.", q.central.title],
           ].map(([n, t, big, d, src]) => (
