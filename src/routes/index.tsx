@@ -37,14 +37,14 @@ function Section({ id, eyebrow, title, sub, children }: { id?: string; eyebrow?:
   );
 }
 
-function IconBox({ children, tone = "primary" }: { children: ReactNode; tone?: "primary" | "sky" | "positive" }) {
-  const t = { primary: "bg-primary/15 text-primary", sky: "bg-sky/15 text-sky", positive: "bg-positive/15 text-positive" }[tone];
-  return <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${t}`}>{children}</div>;
+function IconBox({ children, tone = "primary" }: { children: ReactNode; tone?: "primary" | "sky" | "positive" | undefined }) {
+  const c = { primary: "bg-primary/15 text-primary", sky: "bg-sky/15 text-sky", positive: "bg-positive/15 text-positive" }[tone ?? "primary"];
+  return <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-lg ${c}`}>{children}</div>;
 }
 
 function Index() {
   const [open, setOpen] = useState(false);
-  const q = Object.fromEntries(questions.map((x) => [x.id, x]));
+  const t = (id: string) => questions.find((x) => x.id === id)?.title ?? "";
 
   return (
     <div id="top" className="min-h-screen">
@@ -209,10 +209,10 @@ function Index() {
       <Section eyebrow="Key findings" title="What Did Students Tell Us?">
         <div className="grid gap-5 md:grid-cols-2">
           {[
-            ["01", "Scholarship Discovery", "40.8%", "Selected either ‘Not very confident’ or ‘Not sure where to start’ when finding suitable scholarships.", q.confidence.title],
-            ["02", "Career Information Is Fragmented", "Multiple", "Respondents use multiple channels for career guidance, including teachers, personal networks, websites and social media.", q.guidance.title],
-            ["03", "Job-Ready Skills Lead", "26.2%", "Job-ready skills received the highest share of resource priorities, while scholarships and career roadmaps each received 22.3%.", q.priority.title],
-            ["04", "Potential Interest in One Central Resource", "77.7%", "Respondents answered Yes or Maybe when asked whether a single digital page of verified scholarship, course and career links would be useful.", q.central.title],
+            ["01", "Scholarship Discovery", "40.8%", "Selected either ‘Not very confident’ or ‘Not sure where to start’ when finding suitable scholarships.", t("confidence")],
+            ["02", "Career Information Is Fragmented", "Multiple", "Respondents use multiple channels for career guidance, including teachers, personal networks, websites and social media.", t("guidance")],
+            ["03", "Job-Ready Skills Lead", "26.2%", "Job-ready skills received the highest share of resource priorities, while scholarships and career roadmaps each received 22.3%.", t("priority")],
+            ["04", "Potential Interest in One Central Resource", "77.7%", "Respondents answered Yes or Maybe when asked whether a single digital page of verified scholarship, course and career links would be useful.", t("central")],
           ].map(([n, t, big, d, src]) => (
             <div key={n} className="card-surface reveal bg-elevated p-7">
               <p className="font-mono text-xs uppercase tracking-widest text-sky">Insight {n} — {t}</p>
